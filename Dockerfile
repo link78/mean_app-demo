@@ -1,26 +1,20 @@
-# STEP 1 build static website
-FROM node:alpine as builder
+#use this use a build docker image
+FROM node:alpine AS builder
 
+#update node alpine image
 RUN apk update && apk add --no-cache make git
-# Create app directory
 
-WORKDIR /app# Install app dependencies
+#create working directory
+WORKDIR /app
 
-COPY package.json package-lock.json Makefile  /app/
+COPY . .
 
-RUN cd /app && npm set progress=false && npm install
+#install dependencies and run app
+RUN npm install && \
+    npm run build
 
-# Copy project files into the docker image
-COPY . /app
-RUN cd /app && npm run build
-
-# STEP 2 build a small nginx image with static website
+#image for deploy
 FROM nginx:alpine
-## Remove default nginx website
 
-RUN rm -rf /usr/share/nginx/html/*
-## From 'builder' copy website to default nginx public folder
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+#Copy to nginx web server: will be listen to 0.0.0.0:80
+COPY --from=builder /app/dist/* /usr/share/nginx/html/
