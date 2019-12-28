@@ -1,4 +1,5 @@
-# STEP 1 build static websiteFROM node:alpine as builder
+# STEP 1 build static website
+FROM node:alpine as builder
 RUN apk update && apk add --no-cache make git# Create app directory
 
 WORKDIR /app# Install app dependencies
