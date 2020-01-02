@@ -50,7 +50,7 @@ stage('compile'){
      //   sh 'yarn test:ci'
      //   junit 'reports/**/*.xml'
      
-    }
+  //  }
    // stage('E2E Test') {
       
     //    unstash 'node_modules'
