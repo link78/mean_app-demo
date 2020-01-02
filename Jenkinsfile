@@ -1,5 +1,5 @@
 podTemplate(name: 'ng-devops',label: 'ng-devops',containers: [
-containerTeplate(name: 'ng-node', image: 'circleci/node:9.3-stretch-browsers',ttyEnable: true, commad: 'cat')
+containerTemplate(name: 'ng-node', image: 'circleci/node:9.3-stretch-browsers',ttyEnable: true, commad: 'cat')
 ],
 volumes: [
 hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
