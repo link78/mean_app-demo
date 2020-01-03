@@ -23,7 +23,7 @@ volumes: [
     stage ('Build App') {
       container('nodejs') {
       sh 'npm install'
-      sh 'npm install -g @angular/cli'
+     // sh 'npm install -g @angular/cli'
       }
     }
 	 
